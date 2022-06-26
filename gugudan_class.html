@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>구구단</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+</head>
+<body>
+    <div id="root"></div>
+    <script type="text/babel">
+        class GuGuDan extends React.Component {
+            constructor(props){
+                super(props);
+                this.state={ //바뀌는 것들
+                    first: Math.ceil(Math.random()*9),
+                    second: Math.ceil(Math.random()*9),
+                    value: '',
+                    result: '',
+                };
+            }
+
+            onSubmit = (e) => { //구구단 로직
+                            e.preventDefault();
+                            if (parseInt(this.state.value) === this.state.first * this.state.second){
+                                this.setState( (prevState) => {//입력이 되었을 때 화면에서 뭐가 바뀔지
+                                    return {  //prevState를 쓰면 이전 state값을 쓸 수 있다.
+                                    result: '정답 ' + prevState.value,
+                                    first: Math.ceil(Math.random()*9),
+                                    second: Math.ceil(Math.random()*9),
+                                    value: '',}
+                                });
+                            } else{
+                                this.setState({
+                                    result: '땡',
+                                    value: '',
+                                });
+                            }
+                        }
+            
+            onChange = (e)=> this.setState({value: e.target.value}) //직접 만들어준 함수는 무조건 화살표 함수를 써야 한다. constructor랑 render는 함수로 써도 됨
+
+            input; //그냥 외우는 거라고 함.
+
+            render(){ //태그를 넣기
+                return ( //안 바뀌는 것들은 그냥 태그로
+                    <>
+                        <div>{this.state.first}곱하기{this.state.second}는?</div>
+                        <form onSubmit={this.onSubmit}>
+                            <input ref = {(c) => {this.input = c;}} type="number" value={this.state.value} onChange={this.onChange}/>
+                            <button>입력</button>
+                        </form>
+                        <div>{this.state.result}</div>
+                    </>
+                ); //소괄호 없어도 된다고..
+                //<>, </> 태그로 div 태그를 없앨 수 있으나 지원을 안 할 경우 <React.Fragment> </React.Fragment>를 하면 된다.
+            }
+        }
+    </script>
+    <script type="text/babel">
+        ReactDOM.render(<GuGuDan/>, document.querySelector('#root'));
+    </script>
+</body>
+</html>

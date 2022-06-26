@@ -1,0 +1,55 @@
+자연스러운 화면 전환
+single page
+재사용 컴포넌트 - 중복된 요소를 하나로 묶어주기 가능
+
+상태는 바뀌는 부분~
+
+input도 setState로 해줘야 에러가 덜 난다.
+
+this.setState는 this.state를 쓸 때는 함수로, 아닐 때는 객체로 쓴다.
+
+html의 class -> className
+html의 for -> htmlFor
+
+package.json에 리액트 개발에 필요한 모든 것을 넣어주면 된다.
+1. 폴더를 하나 만든다.
+2. 터미널에 npm init 쓰고
+3. name:폴더이름, author:내이름, license:MIT 작성
+4. Is this OK?에 yes 입력
+5. package.json 생성
+
+react와 reactDOM 설치
+1. 터미널에 npm i react react-dom 작성
+
+webpack과 webpack-cli 설치 (-D는 개발용이라는 의미)
+npm i -D webpack webpack-cli
+
+webpack.config.js 파일 생성
+module.exports = {};
+
+client.jsx 파일 생성
+const React = require('react');
+const ReactDom = require('react-dom');
+
+====> 더이상 npm에서 불러오기 때문에
+<script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+이 필요없다.
+
+<script src="./dist/app.js"></script>로 연결
+=> create-react-app이 이것들을 자동으로 해준다.
+
+파일이 하나로 합쳐져야 html에서 인식이 될 수 있기 때문에
+webpack이 그 역할을 해준다.
+
+===오류===
+'webpack'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는 배치 파일이 아닙니다.
+=> 명령어 등록이 안 되어 있을 때 나는 오류
+sol: 1. 명령어로 등록한다. 2. package.json의 scripts에 넣는다. 그리고 npm run dev로 실행시킴 3.npx webpack으로 실행
+
+webpack에 babel을 추가해야 함
+npm i -D @babel/core @babel/preset-env @babel/preset-react babel-loader 
+- 바벨과 웹팩 연결
+
+2-6
